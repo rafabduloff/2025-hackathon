@@ -120,7 +120,7 @@ const Scene: React.FC<{ selectedCharacter: number; onCharacterSelect: (index: nu
   const characters = [
     {
       name: 'Iron Man',
-      model: 'https://ucarecdn.com/1b8b4216-700d-4607-8177-a583b985676b.glb',
+      model: 'https://ucarecdn.com/1b8b4216-700d-4607-8177-a583b985676b/iron_man_mark_85.glb',
       position: [0, 0, 0] as [number, number, number],
     },
     {
