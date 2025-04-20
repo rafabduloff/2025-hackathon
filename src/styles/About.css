@@ -1,0 +1,247 @@
+/* Добавляем фон с блобами */
+@keyframes moveBlobAbout1 {
+  0% { transform: translate(-60%, -40%) rotate(0deg) scale(1); }
+  50% { transform: translate(-50%, -55%) rotate(180deg) scale(1.2); }
+  100% { transform: translate(-60%, -40%) rotate(360deg) scale(1); }
+}
+
+@keyframes moveBlobAbout2 {
+  0% { transform: translate(-40%, -60%) rotate(0deg) scale(1.1); }
+  50% { transform: translate(-55%, -50%) rotate(-180deg) scale(0.9); }
+  100% { transform: translate(-40%, -60%) rotate(-360deg) scale(1.1); }
+}
+
+.background-blob-about {
+  content: '';
+  position: fixed;
+  width: 80vmax;
+  height: 80vmax;
+  border-radius: 50%;
+  filter: blur(150px);
+  opacity: 0.1;
+  z-index: 0;
+  will-change: transform; 
+  pointer-events: none;
+}
+
+.blob-about1 {
+  top: 50%; left: 50%;
+  background: radial-gradient(circle, rgba(200, 50, 50, 0.5) 0%, transparent 70%); /* Красный */
+  animation: moveBlobAbout1 70s linear infinite alternate;
+}
+
+.blob-about2 {
+  top: 50%; left: 50%;
+  background: radial-gradient(circle, rgba(50, 80, 200, 0.5) 0%, transparent 70%); /* Синий */
+  animation: moveBlobAbout2 80s linear infinite alternate;
+}
+
+.about-container {
+  min-height: 100vh;
+  /* Убираем градиент, используем блобы и цвет body */
+  /* background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); */
+  color: #fff;
+  padding: 4rem 2rem; /* Больше отступов */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Выравниваем по верху */
+  position: relative; /* Для z-index */
+  overflow: hidden; /* Чтобы блобы не вылезали */
+}
+
+.about-content {
+  max-width: 1100px; /* Чуть уже */
+  width: 100%;
+  padding: 3rem; /* Больше паддинг */
+  /* Делаем фон полупрозрачным с размытием */
+  background: rgba(25, 25, 30, 0.75);
+  backdrop-filter: blur(15px);
+  border-radius: 25px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1); /* Тень + рамка */
+  animation: fadeIn 0.8s ease-out;
+  position: relative; /* Для z-index */
+  z-index: 1;
+}
+
+.about-title {
+  font-size: clamp(2.5rem, 6vw, 3.5rem); /* Адаптивный размер */
+  text-align: center;
+  margin-bottom: 3rem; /* Больше отступ */
+  /* Используем цвет вместо градиента для лучшей читаемости */
+  color: #e53935; /* Фирменный красный */
+  /* background: linear-gradient(90deg, #ff0000, #ff4500); */
+  /* -webkit-background-clip: text; */
+  /* -webkit-text-fill-color: transparent; */
+  text-shadow: 0 0 15px rgba(229, 57, 53, 0.5), 0 0 5px rgba(255, 255, 255, 0.2); /* Улучшенная тень */
+  font-family: 'Orbitron', sans-serif; /* Пример более футуристичного шрифта (нужно подключить) */
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.about-section {
+  margin-bottom: 3.5rem; /* Увеличиваем отступ */
+  padding: 0; /* Убираем внутренний паддинг секции */
+  background: none; /* Убираем фон секции */
+  border-radius: 0;
+  transition: none;
+  transform: none;
+}
+
+.about-section:hover {
+  transform: none;
+}
+
+.section-title {
+  font-size: clamp(1.6rem, 4vw, 2rem);
+  color: #ff8a65; /* Оранжевый */
+  margin-bottom: 1.5rem; /* Больше отступ */
+  position: relative;
+  padding-bottom: 0.8rem;
+  text-align: left; /* Выравнивание по левому краю */
+  font-family: 'Roboto Condensed', sans-serif; /* Другой шрифт (нужно подключить) */
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 138, 101, 0.3); /* Линия под заголовком */
+}
+
+/* Убираем старый псевдоэлемент */
+.section-title::after {
+ display: none;
+}
+
+.section-text {
+  font-size: clamp(1rem, 2vw, 1.15rem); /* Адаптивный размер */
+  line-height: 1.7; /* Больше интервал */
+  color: #d0d0d0; /* Светлее текст */
+}
+
+.features-grid {
+  display: grid;
+  /* Делаем 2 колонки для карточек фич */
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.feature-card {
+  /* Стилизуем как карточку */
+  background: rgba(40, 40, 50, 0.6);
+  padding: 2rem;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 5px 15px rgba(0,0,0, 0.2);
+}
+
+.feature-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3); 
+  border-color: rgba(255, 138, 101, 0.5); /* Оранжевая рамка при наведении */
+  background: rgba(50, 50, 60, 0.7);
+}
+
+.feature-title {
+  font-size: clamp(1.2rem, 3vw, 1.4rem);
+  color: #ffab91; /* Светло-оранжевый */
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+}
+
+.feature-text {
+  font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+  line-height: 1.6;
+  color: #c5c5c5;
+}
+
+.tech-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0 0;
+  /* Используем grid для списка технологий */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.tech-list li {
+  padding: 1rem;
+  position: relative;
+  color: #d0d0d0;
+  background: rgba(40, 40, 50, 0.5);
+  border-radius: 8px;
+  transition: background 0.3s ease, transform 0.3s ease;
+  border-left: 4px solid #ff8a65; /* Оранжевая полоска слева */
+}
+
+.tech-list li:hover {
+    background: rgba(55, 55, 65, 0.7);
+    transform: translateX(5px);
+}
+
+.tech-list li strong {
+    color: #ffab91; /* Светло-оранжевый */
+    font-weight: 600;
+}
+
+/* Убираем старый маркер */
+.tech-list li::before {
+ display: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .about-container {
+    padding: 2rem 1rem;
+  }
+  .about-content {
+    padding: 1.5rem;
+  }
+  .about-title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+  .section-title {
+    font-size: 1.7rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+  }
+  .features-grid {
+    /* Остается 1 колонка */
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .tech-list {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-container {
+    padding: 1.5rem 0.5rem;
+  }
+   .about-content {
+    padding: 1rem;
+  }
+  .about-title {
+    font-size: 2rem;
+  }
+   .section-title {
+    font-size: 1.5rem;
+  }
+   .feature-card {
+    padding: 1.5rem;
+  }
+  .tech-list li {
+      padding: 0.8rem;
+  }
+} 

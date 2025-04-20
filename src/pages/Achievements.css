@@ -1,0 +1,140 @@
+/* Добавляем фон с блобами */
+@keyframes moveBlobAch1 {
+  0% { transform: translate(-60%, -40%) rotate(0deg) scale(1.2); }
+  50% { transform: translate(-50%, -55%) rotate(-180deg) scale(1.0); }
+  100% { transform: translate(-60%, -40%) rotate(-360deg) scale(1.2); }
+}
+
+@keyframes moveBlobAch2 {
+  0% { transform: translate(-40%, -60%) rotate(0deg) scale(1.0); }
+  50% { transform: translate(-55%, -50%) rotate(180deg) scale(1.3); }
+  100% { transform: translate(-40%, -60%) rotate(360deg) scale(1.0); }
+}
+
+.background-blob-ach {
+  content: ''; position: fixed; width: 70vmax; height: 70vmax;
+  border-radius: 50%; filter: blur(140px); opacity: 0.12;
+  z-index: 0; will-change: transform; pointer-events: none;
+}
+.blob-ach1 { top: 50%; left: 50%; background: radial-gradient(circle, rgba(50, 180, 200, 0.5) 0%, transparent 70%); animation: moveBlobAch1 75s linear infinite alternate; }
+.blob-ach2 { top: 50%; left: 50%; background: radial-gradient(circle, rgba(180, 50, 200, 0.5) 0%, transparent 70%); animation: moveBlobAch2 85s linear infinite alternate; }
+/* --- Конец блобов --- */
+
+.achievements-page {
+  max-width: 1300px; /* Шире */
+  margin: 0 auto;
+  padding: 3rem 2rem; /* Больше отступы */
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  color: #e0e0e0; /* Светлый текст по умолчанию */
+}
+
+.achievements-page h1 {
+  text-align: center;
+  color: #fca311; /* Золотой */
+  margin-bottom: 2.5rem;
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
+  text-shadow: 0 0 15px rgba(252, 163, 17, 0.5);
+}
+
+.achievements-summary {
+  display: flex;
+  justify-content: center;
+  gap: 2rem; /* Меньше gap */
+  margin-bottom: 3rem;
+  padding: 1.5rem 2rem;
+  background: rgba(35, 35, 45, 0.7); /* Темный фон */
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  flex-wrap: wrap; /* Перенос на мобильных */
+}
+
+.summary-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 1 150px; /* Адаптивность */
+  text-align: center;
+}
+
+.summary-label {
+  font-size: 0.9rem;
+  color: #b0b0b0; /* Светлее */
+  margin-bottom: 0.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.summary-value {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.summary-value.points-value {
+  color: #fca311; /* Золотой для очков */
+}
+
+.category-filters { /* Переименовали класс */
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.filter-button { /* Переименовали класс */
+  padding: 0.6rem 1.5rem;
+  border: 1px solid rgba(252, 163, 17, 0.4); /* Золотая рамка */
+  background: transparent;
+  color: #fca311; /* Золотой текст */
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.filter-button:hover {
+  background: rgba(252, 163, 17, 0.15);
+  border-color: #fca311;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.filter-button.active {
+  background: #fca311;
+  color: #1a1d24; /* Темный текст на активной кнопке */
+  font-weight: 600;
+  box-shadow: 0 0 15px rgba(252, 163, 17, 0.5);
+}
+
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* Адаптивные колонки */
+  gap: 1.5rem;
+}
+
+.achievements-loading,
+.achievements-error,
+.no-achievements {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.2rem;
+  color: #a0a0a0;
+  grid-column: 1 / -1; /* Занимает всю ширину грида */
+}
+
+/* Добавляем блобы в контейнер */
+.achievements-page::before, .achievements-page::after {
+    content: ''; position: fixed; width: 70vmax; height: 70vmax;
+    border-radius: 50%; filter: blur(140px); opacity: 0.12;
+    z-index: 0; will-change: transform; pointer-events: none;
+}
+.achievements-page::before {
+    top: 50%; left: 50%; background: radial-gradient(circle, rgba(50, 180, 200, 0.5) 0%, transparent 70%); animation: moveBlobAch1 75s linear infinite alternate; 
+}
+.achievements-page::after {
+    top: 50%; left: 50%; background: radial-gradient(circle, rgba(180, 50, 200, 0.5) 0%, transparent 70%); animation: moveBlobAch2 85s linear infinite alternate;
+} 

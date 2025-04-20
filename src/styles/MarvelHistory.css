@@ -1,0 +1,380 @@
+
+
+body {
+  
+  background-color: #1a1d24; 
+  background-image: radial-gradient(ellipse at center, #282c34 0%, #1a1d24 70%);
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
+  color: #e0e0e0; 
+  font-family: 'Roboto', sans-serif;
+  min-height: 100vh;
+}
+
+
+
+
+.marvel-history-container {
+  
+   
+  
+   
+  
+   
+  padding: 3rem 4rem; 
+  background-color: transparent; 
+  position: relative; 
+  box-sizing: border-box; 
+  width: 100%;
+}
+
+
+
+@keyframes moveBlob1 {
+  0% { transform: translate(-50%, -50%) rotate(0deg) scale(1.1); }
+  50% { transform: translate(-40%, -60%) rotate(180deg) scale(1.3); }
+  100% { transform: translate(-50%, -50%) rotate(360deg) scale(1.1); }
+}
+
+@keyframes moveBlob2 {
+  0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+  50% { transform: translate(-65%, -40%) rotate(-180deg) scale(1.2); }
+  100% { transform: translate(-50%, -50%) rotate(-360deg) scale(1); }
+}
+
+@keyframes moveBlob3 {
+  0% { transform: translate(-50%, -50%) rotate(0deg) scale(1.2); }
+  50% { transform: translate(-55%, -55%) rotate(150deg) scale(1); }
+  100% { transform: translate(-50%, -50%) rotate(360deg) scale(1.2); }
+}
+
+
+.background-blob {
+  content: '';
+  position: fixed; 
+  width: 70vmax; 
+  height: 70vmax;
+  border-radius: 50%;
+  filter: blur(120px); 
+  opacity: 0.25; 
+  z-index: -1; 
+  will-change: transform; 
+  pointer-events: none; 
+}
+
+
+.blob1 {
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  background: radial-gradient(circle, rgba(50, 80, 200, 0.5) 0%, rgba(50, 80, 200, 0) 70%); 
+  animation: moveBlob1 55s linear infinite alternate; 
+}
+
+.blob2 {
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  width: 75vmax; 
+  height: 75vmax;
+  background: radial-gradient(circle, rgba(200, 50, 50, 0.5) 0%, rgba(200, 50, 50, 0) 70%); 
+  animation: moveBlob2 65s linear infinite alternate; 
+}
+
+.blob3 {
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  width: 65vmax; 
+  height: 65vmax;
+  background: radial-gradient(circle, rgba(210, 150, 40, 0.4) 0%, rgba(210, 150, 40, 0) 70%); 
+  opacity: 0.2;
+  animation: moveBlob3 70s linear infinite alternate; 
+}
+
+
+
+.marvel-history-container h1 {
+  text-align: center;
+  color: #fca311; 
+  margin-bottom: 70px; 
+  font-size: 3.8em; 
+  text-shadow: 0 0 12px rgba(252, 163, 17, 0.5); 
+  font-weight: 700;
+  
+  max-width: 1000px; 
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.events-timeline {
+  max-width: 900px; 
+  margin: 0 auto; 
+}
+
+
+.history-event-block {
+  display: flex; 
+  flex-direction: column;
+  margin-bottom: 12rem; 
+  position: relative;
+  padding: 2rem 0; 
+  min-height: 400px; 
+
+  
+  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+  opacity: 0;
+  transform: translateY(50px); 
+}
+
+.history-event-block.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+.phase-title {
+    text-align: center; 
+    font-size: 2.8em; 
+    color: #e4b43a; 
+    margin-bottom: 3rem; 
+    padding-bottom: 0.7rem;
+    border-bottom: 2px solid rgba(228, 180, 58, 0.6); 
+    display: inline-block; 
+}
+
+
+.event-content {
+  display: flex;
+  align-items: center; 
+  gap: 4rem; 
+  width: 100%; 
+  flex-grow: 1; 
+}
+
+.layout-text-left .event-content {
+  flex-direction: row; 
+}
+
+.layout-text-right .event-content {
+  flex-direction: row-reverse;
+}
+
+
+.event-text {
+  flex: 1.3; 
+}
+
+.event-year {
+  display: block;
+  font-size: 1.2em; 
+  color: #b0b0b0; 
+  margin-bottom: 0.6rem;
+}
+
+.event-title {
+  font-size: 2.3em; 
+  color: #e4b43a; 
+  margin-bottom: 1.2rem; 
+  font-weight: 600;
+  line-height: 1.3; 
+}
+
+.event-description {
+  font-size: 1.25em; 
+  line-height: 1.75; 
+  color: #e5e5e5; 
+}
+
+
+.event-image-placeholder {
+  flex-basis: 450px; 
+  flex-shrink: 0; 
+  max-width: 45%; 
+  text-align: center; 
+  align-self: center; 
+}
+
+.event-image-placeholder img {
+  display: block; 
+  margin: 0 auto; 
+  width: 420px;  
+  
+   
+  height: auto; 
+  max-height: 450px; 
+  object-fit: cover; 
+  border-radius: 12px; 
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5); 
+  transition: transform 0.3s ease-in-out; 
+}
+
+.event-image-placeholder img:hover {
+    transform: scale(1.03); 
+}
+
+
+.error-placeholder {
+  color: #ff7b7b; 
+  font-style: italic;
+}
+
+
+.scroll-next-button {
+  position: fixed; 
+  bottom: 35px; 
+  left: 50%;
+  transform: translateX(-50%); 
+  padding: 14px 30px; 
+  background-color: #e4b43a; 
+  color: #1a1a1a; 
+  border: none;
+  border-radius: 30px; 
+  font-size: 1.1em; 
+  font-weight: bold;
+  cursor: pointer;
+  
+  transition: background-color 0.3s ease, transform 0.3s ease, opacity 0.5s ease-in-out; 
+  z-index: 1000; 
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.35);
+  opacity: 1; 
+}
+
+.scroll-next-button.hidden-button {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px); 
+    pointer-events: none; 
+}
+
+.scroll-next-button:hover {
+  background-color: #f5c545; 
+  transform: translateX(-50%) scale(1.05); 
+}
+
+.scroll-next-button .arrow {
+  margin-left: 10px; 
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.scroll-next-button:hover .arrow {
+  transform: translateY(4px); 
+}
+
+
+
+@media (max-width: 1024px) {
+    .marvel-history-container {
+        padding: 3rem 3rem; 
+    }
+    .events-timeline {
+        max-width: 85%; 
+    }
+    .event-content {
+        gap: 3rem;
+    }
+     .event-image-placeholder {
+        flex-basis: 400px; 
+    }
+    .event-image-placeholder img {
+        width: 360px;
+        max-height: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+  .marvel-history-container {
+      padding: 2rem 1.5rem; 
+  }
+   .events-timeline {
+        max-width: 90%; 
+    }
+  .marvel-history-container h1 {
+    font-size: 3em; 
+    margin-bottom: 50px;
+  }
+
+  .history-event-block {
+      margin-bottom: 8rem; 
+      min-height: auto; 
+      padding: 0; 
+  }
+  
+  .phase-title {
+      font-size: 2.2em;
+      margin-bottom: 2.5rem;
+  }
+
+  .event-content,
+  .layout-text-right .event-content {
+    flex-direction: column; 
+    text-align: center;
+    gap: 2rem; 
+  }
+  
+  .event-image-placeholder {
+    flex-basis: auto; 
+    max-width: 80%; 
+    margin-top: 1.5rem; 
+  }
+
+  .event-image-placeholder img {
+    width: 100%; 
+    max-width: 450px; 
+    height: auto; 
+    max-height: none; 
+  }
+
+  .event-text {
+      order: 2; 
+  }
+
+  .event-title { font-size: 1.8em; }
+  .event-description { font-size: 1.1em; }
+
+  .scroll-next-button {
+        padding: 12px 24px;
+        font-size: 1em;
+        bottom: 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+      
+      background-image: none;
+      background-color: #1a1d24;
+  }
+
+  .marvel-history-container {
+    padding: 1.5rem 1rem; 
+  }
+   .events-timeline {
+        max-width: 95%; 
+    }
+  .marvel-history-container h1 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+  }
+
+  .history-event-block {
+      margin-bottom: 6rem; 
+  }
+  
+  .phase-title {
+      font-size: 1.9em;
+  }
+
+  .event-title { font-size: 1.6em; }
+  .event-description { font-size: 1.05em; }
+  
+  .event-image-placeholder {
+      max-width: 90%; 
+      margin-top: 1rem;
+  }
+
+  .scroll-next-button {
+      padding: 10px 20px;
+      font-size: 0.9em;
+  }
+} 

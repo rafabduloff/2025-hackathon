@@ -1,0 +1,146 @@
+/* src/components/Leaderboard/LeaderboardSidebar.css */
+
+.leaderboard-sidebar {
+  position: fixed;
+  top: 0;
+  right: -380px; /* Скрыто за экраном */
+  width: 360px; /* Ширина сайдбара */
+  height: 100%;
+  background: linear-gradient(160deg, rgba(35, 28, 60, 0.95), rgba(20, 15, 35, 0.95));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: -5px 0 25px rgba(0, 0, 0, 0.4);
+  transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Плавное выезжание */
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.leaderboard-sidebar.open {
+  right: 0; /* Показываем */
+}
+
+/* --- УДАЛЕНО: Стили для оверлея --- */
+/*
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0s linear 0.4s;
+  z-index: 999;
+}
+
+.leaderboard-sidebar.open + .sidebar-overlay, 
+.leaderboard-sidebar.open .sidebar-overlay { 
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.4s ease, visibility 0s linear 0s;
+}
+*/
+
+.sidebar-content {
+  padding: 1.5rem;
+  overflow-y: auto; /* Прокрутка, если список длинный */
+  flex-grow: 1;
+  color: #e0e0e0;
+  position: relative; /* Для кнопки закрытия */
+}
+
+.sidebar-content h2 {
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #fff;
+  font-size: 1.8rem;
+  text-shadow: 0 0 8px rgba(180, 150, 255, 0.5);
+}
+
+.close-sidebar-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.close-sidebar-button:hover {
+  color: #fff;
+}
+
+.sidebar-loading,
+.sidebar-error,
+.no-data {
+  text-align: center;
+  margin-top: 3rem;
+  color: #bbb;
+  font-style: italic;
+}
+
+.sidebar-error {
+  color: #ff8a8a;
+}
+
+.leaderboard-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.leaderboard-item {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 0.5rem;
+  margin-bottom: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.leaderboard-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.leaderboard-item .rank {
+  font-weight: bold;
+  color: #e4b43a; /* Золотой */
+  min-width: 30px; /* Чтобы выровнять */
+  text-align: right;
+  margin-right: 10px;
+  font-size: 1.1rem;
+}
+
+.leaderboard-item .avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: cover;
+}
+
+.leaderboard-item .nickname {
+  flex-grow: 1; /* Занимает доступное пространство */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1rem;
+  color: #f0f0f0;
+}
+
+.leaderboard-item .score {
+  font-weight: bold;
+  color: #82d8ff; /* Голубой */
+  font-size: 1.1rem;
+  margin-left: 10px;
+} 

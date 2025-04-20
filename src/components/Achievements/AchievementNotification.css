@@ -1,0 +1,84 @@
+.achievement-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateX(100%);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.achievement-notification.visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.notification-content {
+  display: flex;
+  padding: 16px;
+  position: relative;
+}
+
+.achievement-icon {
+  width: 48px;
+  height: 48px;
+  margin-right: 16px;
+  flex-shrink: 0;
+}
+
+.achievement-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.achievement-info {
+  flex-grow: 1;
+}
+
+.achievement-info h3 {
+  margin: 0 0 4px 0;
+  color: #4CAF50;
+  font-size: 1rem;
+}
+
+.achievement-info h4 {
+  margin: 0 0 4px 0;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.achievement-info p {
+  margin: 0 0 8px 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.achievement-points {
+  display: inline-block;
+  padding: 4px 8px;
+  background: #e3f2fd;
+  color: #1976d2;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.close-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #666;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.close-button:hover {
+  color: #333;
+} 

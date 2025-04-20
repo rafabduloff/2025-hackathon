@@ -1,0 +1,145 @@
+.achievement-card {
+  display: flex;
+  /* Темный фон с размытием */
+  background: rgba(35, 35, 45, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 1.5rem; /* Увеличим паддинг */
+  margin: 0; /* Убираем внешний margin, управляем через grid-gap */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden; /* Для позиционирования псевдоэлементов */
+  position: relative;
+  color: #e0e0e0; /* Основной цвет текста */
+}
+
+.achievement-card:hover {
+  transform: translateY(-5px) scale(1.01); /* Легкий подъем */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  border-color: rgba(252, 163, 17, 0.5); /* Золотая рамка при наведении */
+}
+
+/* Стиль для разблокированного достижения */
+.achievement-card.unlocked {
+  border-left: 5px solid #fca311; /* Золотая полоска слева */
+  background: rgba(45, 50, 60, 0.8); /* Чуть другой фон */
+}
+
+/* Можно добавить свечение для разблокированного */
+.achievement-card.unlocked::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    box-shadow: inset 0 0 15px rgba(252, 163, 17, 0.2);
+    pointer-events: none;
+    border-radius: 15px;
+    opacity: 0.7;
+}
+
+.achievement-icon {
+  width: 60px; /* Немного меньше */
+  height: 60px;
+  margin-right: 1.5rem;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.achievement-icon img {
+  width: 75%; /* Иконка чуть меньше фона */
+  height: 75%;
+  object-fit: contain;
+  transition: filter 0.3s ease;
+}
+
+/* Эффект для секретной иконки */
+.achievement-icon img.secret {
+  filter: blur(5px) grayscale(80%);
+  opacity: 0.6;
+}
+.achievement-card:not(.unlocked) .achievement-icon img.secret:hover {
+    filter: blur(2px) grayscale(50%); /* Чуть виднее при наведении */
+    opacity: 0.8;
+}
+
+.achievement-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.achievement-content h3 {
+  margin: 0 0 0.5rem 0;
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.achievement-content p {
+  margin: 0 0 1rem 0;
+  color: #b0b0b0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  flex-grow: 1; /* Занимает доступное место */
+}
+
+.achievement-progress {
+  margin-bottom: 0.5rem;
+}
+
+.progress-bar {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 0.3rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #fca311, #ffcb74); /* Золотой градиент */
+  transition: width 0.5s ease-out;
+  border-radius: 3px;
+}
+
+.progress-text {
+  font-size: 0.8rem;
+  color: #a0a0a0;
+}
+
+.unlock-date {
+  font-size: 0.8rem;
+  color: #fca311; /* Золотой для даты */
+  margin-top: 0.3rem;
+  font-style: italic;
+}
+
+.achievement-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: auto; /* Прижимает к низу */
+}
+
+.achievement-points {
+  display: inline-flex; /* Используем flex для иконки */
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.6rem;
+  background: rgba(252, 163, 17, 0.15); /* Фон для очков */
+  color: #fca311;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+/* Иконка для очков (опционально, можно использовать FontAwesome или SVG) */
+.achievement-points::before {
+    content: '★'; /* Пример иконки */
+    font-size: 0.9em;
+} 

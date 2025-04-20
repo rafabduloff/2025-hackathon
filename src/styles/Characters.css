@@ -1,0 +1,432 @@
+/* --- Общие стили для страниц персонажей --- */
+body {
+    /* Убедимся, что фон body темный, если он не задан глобально */
+    background-color: #1a1d24; 
+    /* Убираем градиент с body, если блобы будут основным фоном */
+    /* background-image: radial-gradient(ellipse at center, #282c34 0%, #1a1d24 70%); */
+}
+
+/* --- Анимированный фон (Копируем из MarvelHistory.css) --- */
+
+@keyframes moveBlob1 {
+  0% { transform: translate(-50%, -50%) rotate(0deg) scale(1.1); }
+  50% { transform: translate(-40%, -60%) rotate(180deg) scale(1.3); }
+  100% { transform: translate(-50%, -50%) rotate(360deg) scale(1.1); }
+}
+
+@keyframes moveBlob2 {
+  0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+  50% { transform: translate(-65%, -40%) rotate(-180deg) scale(1.2); }
+  100% { transform: translate(-50%, -50%) rotate(-360deg) scale(1); }
+}
+
+@keyframes moveBlob3 {
+  0% { transform: translate(-50%, -50%) rotate(0deg) scale(1.2); }
+  50% { transform: translate(-55%, -55%) rotate(150deg) scale(1); }
+  100% { transform: translate(-50%, -50%) rotate(360deg) scale(1.2); }
+}
+
+/* Общие стили для всех блобов */
+.background-blob {
+  content: '';
+  position: fixed; /* Фиксированы */
+  width: 70vmax; 
+  height: 70vmax;
+  border-radius: 50%;
+  filter: blur(130px); /* Чуть сильнее размытие */
+  opacity: 0.2; /* Чуть прозрачнее */
+  z-index: -1; /* За всем контентом */
+  will-change: transform; 
+  pointer-events: none; 
+}
+
+.blob1 {
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  background: radial-gradient(circle, rgba(50, 80, 200, 0.4) 0%, rgba(50, 80, 200, 0) 70%); 
+  animation: moveBlob1 55s linear infinite alternate; 
+}
+
+.blob2 {
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  width: 75vmax; 
+  height: 75vmax;
+  background: radial-gradient(circle, rgba(200, 50, 50, 0.4) 0%, rgba(200, 50, 50, 0) 70%); 
+  animation: moveBlob2 65s linear infinite alternate; 
+}
+
+.blob3 {
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  width: 65vmax; 
+  height: 65vmax;
+  background: radial-gradient(circle, rgba(210, 150, 40, 0.3) 0%, rgba(210, 150, 40, 0) 70%); 
+  opacity: 0.18;
+  animation: moveBlob3 70s linear infinite alternate; 
+}
+
+
+/* --- Characters List Page --- */
+
+.characters-list-container {
+  padding: 3rem 2rem; /* Немного увеличим паддинг */
+  max-width: 1300px; /* Чуть шире */
+  margin: 0 auto;
+  position: relative; /* Для z-index, если фон из body */
+  z-index: 1;
+  background-color: transparent; /* Чтобы был виден фон body или блобы */
+}
+
+.characters-list-container h1 {
+  text-align: center;
+  margin-bottom: 3rem; /* Увеличим отступ */
+  color: #e4b43a; 
+  font-size: 3.2em; /* Немного увеличим */
+  text-shadow: 0 0 10px rgba(228, 180, 58, 0.5); 
+}
+
+.characters-grid {
+  display: grid;
+  /* Устанавливаем строго 3 колонки */
+  grid-template-columns: repeat(3, 1fr);
+  /* Возвращаем auto-fill с увеличенной минимальной шириной */
+  /* grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); */ 
+  gap: 2.5rem; /* Можно немного уменьшить gap */
+}
+
+/* --- Character Card --- */
+
+.character-card {
+  /* Фон и базовые стили */
+  background: linear-gradient(145deg, rgba(40, 44, 52, 0.8), rgba(30, 33, 40, 0.7));
+  backdrop-filter: blur(5px); 
+  border-radius: 12px; /* Возвращаем прежний */
+  overflow: hidden;
+  text-decoration: none;
+  color: #e0e0e0; /* Цвет текста */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  /* Возвращаем flex-direction и text-align */
+  flex-direction: column;
+  text-align: center;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(228, 180, 58, 0.1); 
+  position: relative; 
+  animation: cardAppear 0.5s ease-out backwards;
+  /* Убираем aspect-ratio */
+  /* aspect-ratio: 2 / 3; */
+}
+
+/* Градиентная рамка при наведении */
+.character-card::before {
+    content: "";
+    position: absolute;
+    inset: -1px; 
+    border-radius: 12px; /* Согласовываем */
+    background: linear-gradient(120deg, transparent, #fca311, transparent); 
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: -1;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+}
+
+.character-card:hover::before {
+    opacity: 0.8;
+}
+
+.character-card:hover {
+  /* Возвращаем или оставляем эффект */
+  transform: translateY(-10px) scale(1.03); 
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5); 
+}
+
+.character-card-image {
+  width: 100%;
+  /* Возвращаем фиксированную высоту */
+  height: 350px; /* Можно сделать чуть выше */
+  /* height: 100%; */
+  object-fit: cover; 
+  object-position: center top; 
+  /* Можно вернуть border-bottom */
+  border-bottom: 4px solid #e4b43a;
+  transition: transform 0.4s ease; 
+}
+
+.character-card:hover .character-card-image {
+    transform: scale(1.05); 
+}
+
+/* Восстанавливаем стили для имени */
+.character-card-name {
+  font-size: 1.25em; 
+  margin: 1.3rem 0.5rem;
+  font-weight: 600;
+  color: #f5f5f5;
+}
+
+/* --- Character Detail Page --- */
+
+.character-detail-container {
+  padding: 3rem 4rem; 
+  max-width: 1100px; 
+  margin: 4rem auto; 
+  display: flex;
+  gap: 4rem; 
+  align-items: flex-start; 
+  /* Еще более темный фон */
+  /* background: linear-gradient(150deg, rgba(50, 40, 70, 0.92) 0%, rgba(28, 25, 38, 0.9) 100%); */
+  background: linear-gradient(155deg, rgba(40, 32, 58, 0.95) 0%, rgba(22, 20, 30, 0.92) 100%); /* Темнее фиолетовый -> очень темный */
+  backdrop-filter: blur(10px); 
+  border-radius: 15px;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.04), /* Едва заметный внутренний блик */
+              0 12px 35px rgba(0, 0, 0, 0.65), /* Усилим внешнюю тень */
+              0 0 40px rgba(160, 120, 220, 0.15); /* Свечение можно чуть ослабить */
+  border: 1px solid rgba(180, 140, 255, 0.2); /* Рамка чуть менее заметна */
+  position: relative;
+}
+
+.character-detail-image {
+  width: 360px; /* Еще крупнее */
+  height: auto; /* Автоматическая высота */
+  object-fit: cover;
+  border-radius: 12px;
+  /* Фиолетовая рамка и свечение */
+  border: 5px solid rgba(180, 140, 255, 0.6);
+  flex-shrink: 0; 
+  box-shadow: 0 0 35px rgba(180, 140, 255, 0.4); /* Фиолетовое свечение */
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease, border-color 0.4s ease; 
+}
+
+.character-detail-image:hover {
+    transform: scale(1.04) rotate(1deg); /* Легкий поворот */
+    box-shadow: 0 0 50px rgba(180, 140, 255, 0.6); 
+    border-color: rgba(200, 160, 255, 0.8);
+}
+
+.character-detail-info {
+  flex-grow: 1;
+}
+
+.character-detail-info h1 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  /* Цвет можно оставить золотым или сделать фиолетовым */
+  color: #e4b43a; /* Оставим золотой для контраста */ 
+  /* color: #c0a0ff; */ /* Альтернатива - фиолетовый */
+  font-size: 3.2em; 
+  text-shadow: 0 0 12px rgba(228, 180, 58, 0.5); /* Золотое свечение */
+  /* text-shadow: 0 0 12px rgba(180, 140, 255, 0.5); */ /* Фиолетовое свечение */
+}
+
+.character-detail-description {
+  font-size: 1.2em; 
+  line-height: 1.75;
+  margin-bottom: 3rem;
+  color: #cec8da; 
+}
+
+.character-detail-section {
+  margin-bottom: 2.5rem; 
+}
+
+.character-detail-section h2 {
+  font-size: 1.8em; 
+  /* color: #e4b43a; */
+  color: #c0a0ff; /* Фиолетовый */
+  margin-bottom: 1rem;
+  border-bottom: 2px solid rgba(180, 140, 255, 0.5); /* Фиолетовая линия */
+  text-shadow: 0 0 6px rgba(180, 140, 255, 0.4);
+  padding-bottom: 0.5rem;
+  display: inline-block; /* Чтобы линия была по тексту */
+}
+
+.character-detail-section ul {
+  list-style: none; /* Убираем стандартные маркеры */
+  padding-left: 0;
+}
+
+.character-detail-section li {
+  font-size: 1.05em;
+  line-height: 1.6;
+  padding-left: 1.5em; /* Отступ для псевдоэлемента */
+  position: relative;
+  margin-bottom: 0.5rem;
+  color: #d8d0e8;
+}
+
+/* Добавляем кастомный маркер */
+.character-detail-section li::before {
+    content: '✧'; /* Другой символ */
+    position: absolute;
+    left: 0;
+    color: #c0a0ff; /* Фиолетовый */
+    font-size: 1em;
+    top: 0.1em;
+    text-shadow: 0 0 5px rgba(180, 140, 255, 0.6);
+}
+
+.character-detail-section p {
+  font-size: 1.1em;
+  line-height: 1.6;
+  color: #d8d0e8;
+}
+
+.back-to-list-link {
+  display: inline-block;
+  margin-top: 2.5rem;
+  padding: 10px 20px;
+  color: #f0e8ff;
+  background: linear-gradient(145deg, #7850c0, #583098); /* Фиолетовый градиент */
+  border: 1px solid rgba(200, 160, 255, 0.5);
+  border-radius: 20px; 
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.4), 0 0 8px rgba(180, 140, 255, 0.3) inset;
+}
+
+.back-to-list-link:hover {
+  background: linear-gradient(145deg, #8860d0, #6840a8); 
+  text-decoration: none;
+  transform: scale(1.05) translateY(-1px);
+  box-shadow: 0 5px 10px rgba(0,0,0,0.5), 0 0 12px rgba(200, 160, 255, 0.5) inset;
+}
+
+.character-not-found {
+    display: block; 
+    text-align: center;
+    padding: 4rem;
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+}
+.character-not-found h2 {
+    color: #ff6b6b;
+}
+.character-not-found a {
+    color: #fca311;
+}
+
+/* --- Адаптивность --- */
+/* Сбрасываем изменения в медиа-запросах для grid, т.к. auto-fill теперь сам управляет колонками */
+@media (max-width: 1200px) {
+    /* Ничего не меняем для grid, оставляем 3 колонки */
+    .character-detail-container {
+        max-width: 95%;
+    }
+}
+
+@media (max-width: 900px) {
+    /* Переходим на 2 колонки */
+    .characters-grid {
+       grid-template-columns: repeat(2, 1fr);
+       gap: 1.5rem;
+    }
+    .character-detail-container {
+        padding: 2rem 3rem;
+        gap: 2.5rem;
+    }
+     .character-detail-image {
+        width: 250px;
+     }
+}
+
+@media (max-width: 768px) {
+  /* Оставляем 2 колонки или переходим на 1? Оставим 2 */
+  .characters-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem; 
+  }
+  /* Восстанавливаем стили для картинки в карточке, если они были */
+   /* .character-card-image { height: 240px; } */
+
+  .character-detail-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1.5rem;
+    gap: 2rem;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.3), 0 5px 15px rgba(0, 0, 0, 0.2); 
+    backdrop-filter: blur(4px);
+  }
+
+  .character-detail-image {
+    width: 70%;
+    max-width: 280px; 
+    height: auto;
+    box-shadow: 0 0 15px rgba(228, 180, 58, 0.3);
+  }
+
+   .character-detail-info h1 {
+      text-align: center;
+      font-size: 2.2em;
+  }
+   .character-detail-section h2 {
+       font-size: 1.5em;
+   }
+} 
+
+/* Стили для списка способностей */
+.character-detail-section ul {
+  list-style: none; 
+  padding-left: 0;
+}
+
+.character-detail-section ul li {
+  font-size: 1.05em;
+  line-height: 1.6;
+  padding-left: 1.5em; 
+  position: relative;
+  margin-bottom: 0.5rem;
+  color: #d8d0e8;
+}
+
+.character-detail-section ul li::before {
+    content: '✧'; 
+    position: absolute;
+    left: 0;
+    color: #c0a0ff; 
+    font-size: 1em;
+    top: 0.1em;
+    text-shadow: 0 0 5px rgba(180, 140, 255, 0.6);
+}
+
+/* Новые стили для списка характеристик */
+.characteristics-list {
+    /* Наследуем стили или задаем свои */
+}
+
+.characteristics-list li {
+    display: flex; /* Располагаем название и значение в строку */
+    justify-content: space-between; /* Разносим по краям */
+    padding-left: 0; /* Убираем отступ для псевдоэлемента */
+    margin-bottom: 0.7rem; /* Немного увеличим отступ */
+    border-bottom: 1px dashed rgba(180, 140, 255, 0.2); /* Разделитель */
+    padding-bottom: 0.7rem;
+}
+
+.characteristics-list li::before {
+    display: none; /* Скрываем стандартный маркер */
+}
+
+.char-name {
+    font-weight: 600; /* Выделяем название характеристики */
+    color: #d0c8e0; /* Нейтральный цвет */
+    margin-right: 1em;
+}
+
+.char-value {
+    color: #e0e0e0; /* Цвет значения */
+    text-align: right;
+}
+
+.character-detail-section p {
+  font-size: 1.1em;
+  line-height: 1.6;
+  color: #d8d0e8;
+} 
